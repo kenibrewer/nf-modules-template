@@ -145,8 +145,8 @@ jobs:
       matrix:
         tags:
           [
-            " {% raw %}${{ fromJson(needs.pytest-changes.outputs.modules) }}{% endraw %}",
-            " {% raw %}${{ fromJson(needs.nf-test-changes.outputs.modules) }}{% endraw %}",
+            "{% raw %}${{ fromJson(needs.pytest-changes.outputs.modules) }}{% endraw %}",
+            "{% raw %}${{ fromJson(needs.nf-test-changes.outputs.modules) }}{% endraw %}",
           ]
     steps:
       - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
@@ -191,8 +191,8 @@ jobs:
       matrix:
         tags:
           [
-            " {% raw %}${{ fromJson(needs.pytest-changes.outputs.subworkflows) }}{% endraw %}",
-            " {% raw %}${{ fromJson(needs.nf-test-changes.outputs.subworkflows) }}{% endraw %}",
+            "{% raw %}${{ fromJson(needs.pytest-changes.outputs.subworkflows) }}{% endraw %}",
+            "{% raw %}${{ fromJson(needs.nf-test-changes.outputs.subworkflows) }}{% endraw %}",
           ]
     steps:
       - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
@@ -227,7 +227,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tags: [" {% raw %}${{ fromJson(needs.pytest-changes.outputs.tags) }}{% endraw %}"]
+        tags: ["{% raw %}${{ fromJson(needs.pytest-changes.outputs.tags) }}{% endraw %}"]
         profile: [conda, docker, singularity]
         exclude:
           - tags: nf-test
@@ -261,7 +261,7 @@ jobs:
       - name: Setup Nextflow {% raw %}${{ matrix.NXF_VER }}{% endraw %}
         uses: nf-core/setup-nextflow@v2
         with:
-          version: " {% raw %}${{ matrix.NXF_VER }}{% endraw %}"
+          version: "{% raw %}${{ matrix.NXF_VER }}{% endraw %}"
 
       - name: Setup apptainer
         if: matrix.profile == 'singularity'
@@ -293,7 +293,7 @@ jobs:
         # TODO Only run if the tag includes `sentieon`
         if: env.SENTIEON_ENCRYPTION_KEY != null && env.SENTIEON_LICENSE_MESSAGE != null
         run: |
-          nextflow secrets set SENTIEON_AUTH_DATA $(python3 tests/modules/nf-core/sentieon/license_message.py encrypt --key "{% raw %}${{ secrets.SENTIEON_ENCRYPTION_KEY }}" --message " ${{ secrets.SENTIEON_LICENSE_MESSAGE }}{% endraw %}")
+          nextflow secrets set SENTIEON_AUTH_DATA $(python3 tests/modules/nf-core/sentieon/license_message.py encrypt --key "{% raw %}${{ secrets.SENTIEON_ENCRYPTION_KEY }}" --message "${{ secrets.SENTIEON_LICENSE_MESSAGE }}{% endraw %}")
 
       # Test the module
       - name: Run pytest-workflow
@@ -337,7 +337,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        path: [" {% raw %}${{ fromJson(needs.nf-test-changes.outputs.paths) }}{% endraw %}"]
+        path: ["{% raw %}${{ fromJson(needs.nf-test-changes.outputs.paths) }}{% endraw %}"]
         profile: [conda, docker_self_hosted, singularity]
         exclude:
           - path: modules/nf-core/nf-test
@@ -412,7 +412,7 @@ jobs:
           SENTIEON_AUTH_MECH: "GitHub Actions - token"
         run: |
           # use "docker_self_hosted" if it runs on self-hosted runner and matrix.profile=docker
-          if [ " {% raw %}${{ matrix.profile }}{% endraw %}" == "docker" ]; then
+          if [ "{% raw %}${{ matrix.profile }}{% endraw %}" == "docker" ]; then
             PROFILE="docker_self_hosted"
           else
             PROFILE= {% raw %}${{ matrix.profile }}{% endraw %}
