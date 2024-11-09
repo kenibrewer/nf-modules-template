@@ -1,4 +1,6 @@
-# nf-modules-template
+**This repo has been migrated to [nf-core/modules-template](https://github.com/nf-core/modules-template)**
+
+# nf-modules-template (archived)
 
 This is a [copier](https://copier.readthedocs.io/en/stable/) template for creating a modules library in the style of [nf-core/modules](https://github.com/nf-core/modules/).
 
@@ -13,7 +15,7 @@ This is a [copier](https://copier.readthedocs.io/en/stable/) template for creati
 2. Run copier:
 
    ```bash
-   copier gh:nf-core/nf-modules-template ./my-new-modules-library
+   copier gh:nf-core/modules-template ./my-new-modules-library
    ```
 
 3. Follow the prompts to fill in the template values.
